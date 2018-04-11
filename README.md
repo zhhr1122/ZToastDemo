@@ -10,6 +10,7 @@ a Toast Utils From Z_COMIC
     compile 'com.zhhr:ztoast:1.0.0'
 ## 使用
 ###     显示toast
+
 ####     在activity中使用
      ZToast.makeText(MainActivity.this,"点击事件",ZToast.LENGTH_SHORT).show();
 ####      在fragment中使用
@@ -26,3 +27,25 @@ a Toast Utils From Z_COMIC
     ZToast.setHeight(200);
     //最后调用toast方法
     ZToast.makeText(MainActivity.this,"点击事件",ZToast.LENGTH_SHORT).show();
+
+### PS：推荐使用无actionbar的主题和设置statusbar颜色
+    强烈建议搭配无actionbar的主题来使用
+    
+    在style.xml中：
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    
+    最好再设置一下statusbar的颜色
+    
+    在activity中：
+    
+    Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(Color.TRANSPARENT);

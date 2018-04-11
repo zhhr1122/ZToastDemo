@@ -12,11 +12,11 @@ a Toast Utils From Z_COMIC
 ###     显示toast
 
 ####     在activity中使用
-     ZToast.makeText(MainActivity.this,"点击事件",ZToast.LENGTH_SHORT).show();
+    ZToast.makeText(MainActivity.this,"文字",ZToast.LENGTH_SHORT).show();
 ####      在fragment中使用
-    toast.makeText(getActivity(), text,1000).show();
+    ZToast.makeText(getActivity(), "文字",1000).show();
 ####     在自定义View中使用
-    ZToast.makeText((ViewGroup) getParent(),"切换成功",1000).show();
+    ZToast.makeText((ViewGroup) getParent(),"文字"",1000).show();
 ###      设置toast的各个参数
     在调用makeText方法之前调用init方法来设置参数
     
@@ -27,6 +27,28 @@ a Toast Utils From Z_COMIC
     ZToast.setHeight(200);
     //最后调用toast方法
     ZToast.makeText(MainActivity.this,"点击事件",ZToast.LENGTH_SHORT).show();
+###     判断是否正在显示toast
+
+    ZToast.isShow()
+    当isShow()为true时，则说明正在显示中，可以用来做双击退出
+    
+####     点击两下back按键退出可以这样写：
+    
+    代码如下：
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if((keyCode == KeyEvent.KEYCODE_BACK)){
+            if(ZToast.isShow()){
+                return super.onKeyDown(keyCode, event);
+            }else{
+                ZToast.makeText(MainActivity.this,"再按一次返回键退出",1000).show();
+                return false;
+            }
+        }else{
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+    
+    
 
 ### PS：推荐使用无actionbar的主题和设置statusbar颜色
     强烈建议搭配无actionbar的主题来使用
